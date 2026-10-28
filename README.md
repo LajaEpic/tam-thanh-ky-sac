@@ -136,28 +136,25 @@ Nếu bạn chạy server trên laptop và muốn ngay lập tức có một đ�
 
 ---
 
-## 🎨 5. Tải & Quản lý Media cho 10 Ô Sân Khấu (Ảnh, Video & Slide Flipbook 3D)
+## 🎨 5. Quản lý & Tải Media Trình Chiếu Sân Khấu (Từ Trang Kỹ Thuật)
 
-Hệ thống cho phép bạn tùy biến trực tiếp media cho **toàn bộ 10 ô sân khấu** từ trang Kỹ thuật (`/control`):
+Giao diện trang Kỹ thuật (`/control`) và Sân khấu (`/stage`) được thiết kế đồng bộ và tuyệt đối chuẩn theo phong cách gốc của `XEM_THU_SAU_BEN (1).html`:
 
-### 1. Cách gán file media trên bảng điều khiển Kỹ thuật (`/control`):
-- Tại tab **"02. Sân khấu"**, ở góc trên bên phải của mỗi ô trong số 10 ô đều có biểu tượng chiếc kẹp giấy **📎**:
-  - Bấm vào **📎** để chọn file (Ảnh, Video hoặc Slide PDF) gán cho ô đó.
-  - Khi đã gán file, ô sẽ hiện huy hiệu màu xanh `✓ [Tên file]` và một nút **✕** nhỏ.
-  - Bấm vào ô bất kỳ để lập tức chiếu nội dung đó lên màn hình Sân khấu!
-  - Muốn quay về giao diện tranh vẽ đồ họa mặc định, bạn chỉ cần bấm nút **✕** trên ô đó.
+### 1. Chuyển cụm nạp file từ Sân khấu sang Kỹ thuật:
+- Toàn bộ tính năng nạp tài liệu trước đây ở nút bánh răng ⚙ trên sân khấu đã được **chuyển trọn vẹn sang đặt gọn gàng trong Tab "02. Sân khấu" của trang Kỹ thuật** (ngay dưới thanh trượt trang sách):
+  - **▤ Tải ảnh slide (nhiều ảnh):** Chọn cùng lúc nhiều file ảnh PNG/JPG để làm các trang sách Flipbook (tự động đếm tổng số trang).
+  - **▤ Tải PDF bài thuyết trình:** Nạp file slide PDF của nhóm (hệ thống tự động chiếu theo từng trang sách với hiệu ứng lật trang 3D). *(Mẹo: Lưu file PowerPoint sang PDF trước khi tải để 100% giữ đúng font chữ).*
+  - **▶ Tải video tư liệu:** Nạp file video (MP4/WebM) để chiếu lên sân khấu khi bấm ô "Phát video".
+  - **♫ Tải nhạc nền (MP3):** Nạp bài nhạc nền cho chuyến đò và bấm nút **"▶ Bật nhạc sân khấu"** / **"⏸ Tạm dừng"** để điều khiển âm thanh trên máy chiếu từ xa.
+- Kỹ thuật viên sau khi nhập mã PIN `nambo2026` sẽ toàn quyền quản lý cụm tải file này.
 
-### 2. Chiếu bài thuyết trình Flipbook (Lật trang sách 3D):
-- Ô **"Flipbook"** hỗ trợ:
-  - File **PDF** bài thuyết trình (tự động nhận diện các trang).
-  - Hoặc **chọn cùng lúc nhiều ảnh PNG/JPG** (hệ thống tự động sắp xếp theo thứ tự trang từ 1 đến hết).
-- **💡 Mẹo với file PowerPoint (.pptx):** Trình duyệt web không thể đọc trực tiếp `.pptx`. Bạn hãy mở file trong PowerPoint > chọn **Lưu dưới dạng (Save As) > PDF** trước khi tải lên để giữ 100% font chữ sắc nét và hình ảnh không bị lệch layout.
-- **Hiệu ứng lật trang 3D:** Khi bạn bấm `← Trước` / `Sau →` hoặc kéo thanh trượt trang sách, màn hình Sân khấu sẽ có hiệu ứng xoay trang 3D và đổ bóng chân thực như một quyển sổ thật.
+### 2. 10 Ô chuyển cảnh sân khấu (Giữ 100% giao diện gốc):
+- 10 ô bấm lớn phía trên (`Đón đoàn/QR`, `Flipbook`, `Bến sông`, `Chợ nổi`, `Củ Chi`, `Khmer`, `Gian bếp`, `Truyền thông`, `Phát video`, `Khép sách`) được giữ nguyên vẹn 100% thiết kế đồ họa gốc, bấm mượt mà, chuyển cảnh tức thì lên màn hình máy chiếu.
 
-### 3. File media được lưu trữ ở đâu?
-- Khi chạy có server (Node.js hoặc Python), các file tải lên sẽ được lưu vào thư mục `public/uploads/` và đồng bộ qua mạng tức thì tới màn hình Sân khấu. Server ghi nhớ cấu hình để lần sau mở lên là sẵn sàng chiếu ngay.
-- Khi mở xem thử offline (`file://`), hệ thống lưu tạm vào bộ nhớ trình duyệt để bạn thử nghiệm mượt mà trên 1 máy.
-- Ngoài ra, bạn vẫn có thể chép sẵn 46 ảnh slide vào thư mục `public/slides/` (đặt tên `1.png`, `2.png`...) để server tự động nạp mặc định.
+### 3. Màn hình Sân khấu máy chiếu (`/stage`):
+- Đã được ẩn nút bánh răng ⚙ trôi nổi, giúp màn hình chiếu luôn sạch đẹp, không bị vướng icon cài đặt hay menu trước mắt người xem.
+- Nhấn phím **F** hoặc **nhấp đúp chuột** vào màn hình để bật/tắt chế độ Toàn màn hình (Fullscreen).
+- Nhấn phím mũi tên `←` / `→` trên bàn phím máy chiếu để lật trang slide.
 
 ---
 
