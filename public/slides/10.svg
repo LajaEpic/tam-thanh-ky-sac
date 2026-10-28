@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fcf7ec"/>
+      <stop offset="50%" stop-color="#f8efe0"/>
+      <stop offset="100%" stop-color="#ece2cc"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="80%" cy="20%" r="30%">
+      <stop offset="0%" stop-color="#fce2aa" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#fce2aa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect x="36" y="36" width="1208" height="648" fill="none" stroke="#d5c4a3" stroke-width="2"/>
+  <rect x="48" y="48" width="1184" height="624" fill="none" stroke="#244941" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="1024" cy="180" r="140" fill="url(#sun)"/>
+
+  <!-- Top bar -->
+  <text x="80" y="90" font-family="'Be Vietnam Pro', Arial, sans-serif" font-size="14" font-weight="800" fill="#244941" letter-spacing="4">TAM THANH KỲ SẮC • SÁU BẾN PHƯƠNG NAM</text>
+  <text x="1200" y="90" text-anchor="end" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="700" fill="#b05244">10 / 46</text>
+  <line x1="80" y1="110" x2="1200" y2="110" stroke="#d9cdb4" stroke-width="2"/>
+
+  <!-- Main content -->
+  <g transform="translate(80, 240)">
+    <text x="0" y="0" font-family="'Be Vietnam Pro', Arial, sans-serif" font-size="16" font-weight="700" fill="#b05244" letter-spacing="3">TRANG THUYẾT TRÌNH</text>
+    <text x="0" y="65" font-family="'Playfair Display', Georgia, serif" font-size="52" font-weight="700" fill="#173a36">BẾN 02: PHIÊN CHỢ TÌNH NGƯỜI</text>
+    <text x="0" y="125" font-family="'Be Vietnam Pro', Arial, sans-serif" font-size="22" fill="#58695d" max-width="800">Ghé chợ nổi, lắng nghe nếp sống buôn bán và câu chuyện cây bẹo</text>
+  </g>
+
+  <!-- Visual graphic element -->
+  <g transform="translate(900, 360)">
+    <circle cx="120" cy="80" r="95" fill="none" stroke="#b05244" stroke-width="3" stroke-dasharray="6,4"/>
+    <circle cx="120" cy="80" r="85" fill="#fcf4e4" stroke="#b05244" stroke-width="2"/>
+    <text x="120" y="70" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="bold" fill="#b05244">TRANG</text>
+    <text x="120" y="112" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="bold" fill="#244941">10</text>
+  </g>
+
+  <!-- Bottom decorative note -->
+  <line x1="80" y1="620" x2="1200" y2="620" stroke="#d9cdb4" stroke-width="1"/>
+  <text x="80" y="648" font-family="'Be Vietnam Pro', Arial, sans-serif" font-size="12" fill="#888f7f">Gợi ý: Bạn có thể thay thế trang này bằng cách đặt file ảnh 10.png hoặc 10.jpg vào thư mục public/slides/</text>
+  <text x="1200" y="648" text-anchor="end" font-family="'Be Vietnam Pro', Arial, sans-serif" font-size="12" font-weight="bold" fill="#244941">NHÓM 1 • 2026</text>
+</svg>

@@ -1,0 +1,10 @@
+CÁCH THAY THẾ 46 TRANG SLIDE TRÌNH CHIẾU:
+=========================================
+1. Thư mục này hiện đã có sẵn 46 file mẫu từ 1.svg đến 46.svg.
+2. Để hiển thị slide thực tế của nhóm:
+   - Xuất 46 trang slide từ PowerPoint / Canva / Figma ra định dạng PNG hoặc JPG.
+   - Đặt tên file lần lượt: 1.png, 2.png, ..., 46.png (hoặc 1.jpg, 2.jpg...).
+   - Chép đè vào thư mục `public/slides/` này.
+   - Màn hình Sân khấu (/stage) sẽ tự động ưu tiên load ảnh PNG/JPG thật của bạn!
+3. Ngoài ra, bạn vẫn có thể bấm nút bánh răng ⚙ trên màn hình Sân khấu (/stage)
+   để tải trực tiếp file PDF hoặc ảnh từ máy tính bất kỳ lúc nào mà không cần đổi file.

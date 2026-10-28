@@ -1,0 +1,12 @@
+{
+  "activeStation": 0,
+  "phase": "intro",
+  "unlocked": [],
+  "stage": {
+    "mode": "welcome",
+    "slide": 1,
+    "scene": "song"
+  },
+  "people": {},
+  "updatedAt": 1730000000000
+}

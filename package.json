@@ -1,0 +1,24 @@
+{
+  "name": "tam-thanh-ky-sac-sau-ben",
+  "version": "1.0.0",
+  "description": "Sổ hành trình Sáu bến phương Nam - Hệ thống thuyết trình và tương tác thời gian thực",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "presentation",
+    "realtime",
+    "interactive",
+    "nam-bo"
+  ],
+  "author": "Nhóm 1 - Tam Thanh Kỳ Sắc",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4"
+  }
+}

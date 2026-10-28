@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sau-ben-phuong-nam
+    env: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: ADMIN_PIN
+        value: nambo2026
+      - key: NODE_ENV
+        value: production
