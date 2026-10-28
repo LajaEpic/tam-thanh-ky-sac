@@ -136,25 +136,27 @@ Nếu bạn chạy server trên laptop và muốn ngay lập tức có một đ�
 
 ---
 
-## 🎨 5. Quản lý & Tải Media Trình Chiếu Sân Khấu (Từ Trang Kỹ Thuật)
+## 🎨 5. Trình Chiếu Sân Khấu & Quản Lý Slide 46 Trang
 
-Giao diện trang Kỹ thuật (`/control`) và Sân khấu (`/stage`) được thiết kế đồng bộ và tuyệt đối chuẩn theo phong cách gốc của `XEM_THU_SAU_BEN (1).html`:
+Giao diện và tính năng được giữ nguyên vẹn 100% chuẩn gốc của `XEM_THU_SAU_BEN (1).html`:
 
-### 1. Chuyển cụm nạp file từ Sân khấu sang Kỹ thuật:
-- Toàn bộ tính năng nạp tài liệu trước đây ở nút bánh răng ⚙ trên sân khấu đã được **chuyển trọn vẹn sang đặt gọn gàng trong Tab "02. Sân khấu" của trang Kỹ thuật** (ngay dưới thanh trượt trang sách):
-  - **▤ Tải ảnh slide (nhiều ảnh):** Chọn cùng lúc nhiều file ảnh PNG/JPG để làm các trang sách Flipbook (tự động đếm tổng số trang).
-  - **▤ Tải PDF bài thuyết trình:** Nạp file slide PDF của nhóm (hệ thống tự động chiếu theo từng trang sách với hiệu ứng lật trang 3D). *(Mẹo: Lưu file PowerPoint sang PDF trước khi tải để 100% giữ đúng font chữ).*
-  - **▶ Tải video tư liệu:** Nạp file video (MP4/WebM) để chiếu lên sân khấu khi bấm ô "Phát video".
-  - **♫ Tải nhạc nền (MP3):** Nạp bài nhạc nền cho chuyến đò và bấm nút **"▶ Bật nhạc sân khấu"** / **"⏸ Tạm dừng"** để điều khiển âm thanh trên máy chiếu từ xa.
-- Kỹ thuật viên sau khi nhập mã PIN `nambo2026` sẽ toàn quyền quản lý cụm tải file này.
+### 1. Bảng điều khiển Sân khấu (Tab "02. Sân khấu" trên `/control`):
+- **10 Ô chuyển cảnh nguyên bản:** Bấm chuyển đổi nhanh giữa các chế độ:
+  - *Đón đoàn / QR*, *Flipbook (46 trang)*, *Nền bến sông*, *Nền chợ nổi*, *Video / Củ Chi*, *Nền lễ hội Khmer*, *Nền gian bếp*, *Nền truyền thông*, *Phát video*, *Khép trang sách*.
+- **Thanh điều khiển Flipbook:** Nút `← Trước` / `Sau →` và thanh trượt để lật từ trang 1 đến trang 46 của bài thuyết trình.
 
-### 2. 10 Ô chuyển cảnh sân khấu (Giữ 100% giao diện gốc):
-- 10 ô bấm lớn phía trên (`Đón đoàn/QR`, `Flipbook`, `Bến sông`, `Chợ nổi`, `Củ Chi`, `Khmer`, `Gian bếp`, `Truyền thông`, `Phát video`, `Khép sách`) được giữ nguyên vẹn 100% thiết kế đồ họa gốc, bấm mượt mà, chuyển cảnh tức thì lên màn hình máy chiếu.
+### 2. Màn hình Sân khấu máy chiếu (`/stage`):
+- Màn hình chiếu phong cảnh sông nước Nam Bộ, tranh chào mừng và mã QR tự động.
+- Nút **bánh răng ⚙** ở góc trên bên phải cho phép:
+  - Bật chế độ Toàn màn hình (hoặc bấm phím **F**).
+  - Tải ảnh trang slide hoặc file PDF bài thuyết trình trực tiếp trên máy chiếu.
+  - Tải video tư liệu riêng và nạp nhạc nền.
+  - Nút ẩn/hiện thông tin bến (`stageToggleHint`).
+- Bấm phím mũi tên `←` / `→` trên bàn phím máy chiếu để lật trang slide.
 
-### 3. Màn hình Sân khấu máy chiếu (`/stage`):
-- Đã được ẩn nút bánh răng ⚙ trôi nổi, giúp màn hình chiếu luôn sạch đẹp, không bị vướng icon cài đặt hay menu trước mắt người xem.
-- Nhấn phím **F** hoặc **nhấp đúp chuột** vào màn hình để bật/tắt chế độ Toàn màn hình (Fullscreen).
-- Nhấn phím mũi tên `←` / `→` trên bàn phím máy chiếu để lật trang slide.
+### 3. Thay thế 46 trang slide của nhóm:
+- Trong thư mục `public/slides/` hiện đã có sẵn 46 file mẫu từ `1.svg` đến `46.svg`.
+- Để đưa slide thật của nhóm vào: xuất 46 trang từ PowerPoint/Canva thành ảnh PNG/JPG, đặt tên `1.png`, `2.png`... chép đè vào thư mục `public/slides/` là xong!
 
 ---
 
