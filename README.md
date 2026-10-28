@@ -136,16 +136,28 @@ Nếu bạn chạy server trên laptop và muốn ngay lập tức có một đ�
 
 ---
 
-## 🎨 5. Cách thay thế 46 trang slide thuyết trình
-1. Trong thư mục `public/slides/` hiện đã có sẵn 46 file mẫu nghệ thuật từ `1.svg` đến `46.svg`.
-2. Để đưa slide thực tế của nhóm vào:
-   - Xuất 46 trang slide từ PowerPoint / Canva / Figma thành file ảnh định dạng **PNG** hoặc **JPG**.
-   - Đặt tên file là: `1.png`, `2.png`, ..., `46.png` (hoặc `1.jpg`, `2.jpg`...).
-   - Chép các file ảnh vào thư mục `public/slides/`.
-   - Hệ thống sẽ tự động ưu tiên nạp file ảnh thật của bạn trên màn hình Sân khấu!
-3. Ngoài ra, trên màn hình Sân khấu (`/stage`), bạn có thể bấm nút **bánh răng ⚙** ở góc phải trên để:
-   - Tải nhanh file bài thuyết trình dạng **PDF** hoặc chọn cả thư mục ảnh.
-   - Tải file **Video tư liệu** và **Nhạc nền** trực tiếp trên máy chiếu.
+## 🎨 5. Tải & Quản lý Media cho 10 Ô Sân Khấu (Ảnh, Video & Slide Flipbook 3D)
+
+Hệ thống cho phép bạn tùy biến trực tiếp media cho **toàn bộ 10 ô sân khấu** từ trang Kỹ thuật (`/control`):
+
+### 1. Cách gán file media trên bảng điều khiển Kỹ thuật (`/control`):
+- Tại tab **"02. Sân khấu"**, ở góc trên bên phải của mỗi ô trong số 10 ô đều có biểu tượng chiếc kẹp giấy **📎**:
+  - Bấm vào **📎** để chọn file (Ảnh, Video hoặc Slide PDF) gán cho ô đó.
+  - Khi đã gán file, ô sẽ hiện huy hiệu màu xanh `✓ [Tên file]` và một nút **✕** nhỏ.
+  - Bấm vào ô bất kỳ để lập tức chiếu nội dung đó lên màn hình Sân khấu!
+  - Muốn quay về giao diện tranh vẽ đồ họa mặc định, bạn chỉ cần bấm nút **✕** trên ô đó.
+
+### 2. Chiếu bài thuyết trình Flipbook (Lật trang sách 3D):
+- Ô **"Flipbook"** hỗ trợ:
+  - File **PDF** bài thuyết trình (tự động nhận diện các trang).
+  - Hoặc **chọn cùng lúc nhiều ảnh PNG/JPG** (hệ thống tự động sắp xếp theo thứ tự trang từ 1 đến hết).
+- **💡 Mẹo với file PowerPoint (.pptx):** Trình duyệt web không thể đọc trực tiếp `.pptx`. Bạn hãy mở file trong PowerPoint > chọn **Lưu dưới dạng (Save As) > PDF** trước khi tải lên để giữ 100% font chữ sắc nét và hình ảnh không bị lệch layout.
+- **Hiệu ứng lật trang 3D:** Khi bạn bấm `← Trước` / `Sau →` hoặc kéo thanh trượt trang sách, màn hình Sân khấu sẽ có hiệu ứng xoay trang 3D và đổ bóng chân thực như một quyển sổ thật.
+
+### 3. File media được lưu trữ ở đâu?
+- Khi chạy có server (Node.js hoặc Python), các file tải lên sẽ được lưu vào thư mục `public/uploads/` và đồng bộ qua mạng tức thì tới màn hình Sân khấu. Server ghi nhớ cấu hình để lần sau mở lên là sẵn sàng chiếu ngay.
+- Khi mở xem thử offline (`file://`), hệ thống lưu tạm vào bộ nhớ trình duyệt để bạn thử nghiệm mượt mà trên 1 máy.
+- Ngoài ra, bạn vẫn có thể chép sẵn 46 ảnh slide vào thư mục `public/slides/` (đặt tên `1.png`, `2.png`...) để server tự động nạp mặc định.
 
 ---
 

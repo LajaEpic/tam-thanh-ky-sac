@@ -328,6 +328,46 @@ class AppHandler(SimpleHTTPRequestHandler):
             broadcast()
             return self.send_json({"ok": True})
 
+        if path == '/api/admin/media/remove':
+            slot = data.get('slot')
+            if slot and 'media' in state.setdefault('stage', {}):
+                state['stage']['media'].pop(slot, None)
+                broadcast()
+            return self.send_json({"ok": True})
+
+        if path == '/api/admin/media/upload':
+            slot = data.get('slot')
+            if not slot:
+                return self.send_json({"error": "Thiếu slot"}, 400)
+            
+            # Xử lý base64 upload
+            filename = data.get('filename', 'upload.bin')
+            b64data = data.get('base64', '')
+            if b64data:
+                import base64
+                if ',' in b64data:
+                    b64data = b64data.split(',', 1)[1]
+                file_bytes = base64.b64decode(b64data)
+                safe_name = f"{int(time.time()*1000)}-{filename}"
+                out_dir = os.path.join(os.path.dirname(__file__), 'public', 'uploads')
+                os.makedirs(out_dir, exist_ok=True)
+                out_path = os.path.join(out_dir, safe_name)
+                with open(out_path, 'wb') as f:
+                    f.write(file_bytes)
+                
+                ext = os.path.splitext(filename)[1].lower()
+                mtype = 'video' if ext in ['.mp4', '.webm', '.mov', '.ogg'] else 'pdf' if ext == '.pdf' else 'image'
+                media_info = {
+                    "type": mtype,
+                    "format": ext.replace('.', ''),
+                    "name": filename,
+                    "url": f"/uploads/{safe_name}",
+                    "totalPages": int(data.get('totalPages', 46 if mtype == 'pdf' else 1))
+                }
+                state.setdefault('stage', {}).setdefault('media', {})[slot] = media_info
+                broadcast()
+                return self.send_json({"ok": True, "slot": slot, "media": media_info})
+
         if path == '/api/admin/reset':
             state.update({
                 "activeStation": 0,

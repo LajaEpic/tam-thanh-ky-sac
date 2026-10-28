@@ -42,11 +42,34 @@ const DEFAULT_STATE = {
   stage: {
     mode: 'welcome',
     slide: 1,
-    scene: 'song'
+    scene: 'song',
+    media: {}
   },
   people: {},
   updatedAt: Date.now()
 };
+
+const uploadDir = path.join(__dirname, 'public', 'uploads');
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+
+let upload = null;
+try {
+  const multer = require('multer');
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadDir),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname) || '';
+      const base = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+      cb(null, `${Date.now()}-${base}${ext}`);
+    }
+  });
+  upload = multer({
+    storage,
+    limits: { fileSize: 500 * 1024 * 1024 }
+  });
+} catch (e) {
+  // Multer fallback
+}
 
 let state = { ...DEFAULT_STATE };
 
@@ -143,8 +166,8 @@ function broadcast() {
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 // Giữ kết nối SSE hoạt động định kỳ (heartbeat)
 setInterval(() => {
@@ -305,12 +328,102 @@ app.post('/api/admin/activate', requireAdmin, (req, res) => {
 app.post('/api/admin/stage', requireAdmin, (req, res) => {
   const { mode, slide, scene } = req.body;
   state.stage = {
+    ...state.stage,
     mode: mode || state.stage.mode || 'welcome',
     slide: Number(slide) || state.stage.slide || 1,
     scene: scene || state.stage.scene || 'song'
   };
   broadcast();
   res.json({ ok: true, stage: state.stage });
+});
+
+// 9.1 Upload file media gán vào 1 ô sân khấu
+app.post('/api/admin/media/upload', requireAdmin, (req, res, next) => {
+  if (upload) {
+    return upload.array('files')(req, res, (err) => {
+      if (err) return res.status(400).json({ error: 'Lỗi tải file: ' + err.message });
+      next();
+    });
+  }
+  next();
+}, (req, res) => {
+  const slot = req.body.slot || req.query.slot;
+  if (!slot) return res.status(400).json({ error: 'Thiếu định danh ô (slot)' });
+
+  state.stage.media = state.stage.media || {};
+
+  // Xử lý upload qua multipart/form-data
+  if (req.files && req.files.length > 0) {
+    if (slot === 'book' && req.files.length > 1) {
+      // Chùm ảnh nhiều trang cho Flipbook
+      const sortedFiles = [...req.files].sort((a, b) => a.originalname.localeCompare(b.originalname, 'vi', { numeric: true }));
+      const pages = sortedFiles.map(f => `/uploads/${f.filename}`);
+      state.stage.media[slot] = {
+        type: 'book',
+        format: 'images',
+        name: `${sortedFiles.length} trang ảnh slide`,
+        url: pages[0],
+        pages,
+        totalPages: sortedFiles.length
+      };
+    } else {
+      const file = req.files[0];
+      const ext = path.extname(file.originalname).toLowerCase();
+      let type = 'image';
+      if (['.mp4', '.webm', '.mov', '.ogg'].includes(ext)) type = 'video';
+      else if (ext === '.pdf') type = 'pdf';
+
+      state.stage.media[slot] = {
+        type,
+        format: ext.replace('.', ''),
+        name: file.originalname,
+        url: `/uploads/${file.filename}`,
+        totalPages: type === 'pdf' ? (Number(req.body.totalPages) || 46) : 1
+      };
+    }
+    broadcast();
+    return res.json({ ok: true, slot, media: state.stage.media[slot] });
+  }
+
+  // Fallback: nếu client gửi dữ liệu JSON base64
+  if (req.body.base64 && req.body.filename) {
+    try {
+      const filename = `${Date.now()}-${req.body.filename.replace(/[^a-zA-Z0-9_\-\.]/g, '_')}`;
+      const filepath = path.join(uploadDir, filename);
+      const dataBuffer = Buffer.from(req.body.base64.replace(/^data:.*?;base64,/, ''), 'base64');
+      fs.writeFileSync(filepath, dataBuffer);
+
+      const ext = path.extname(filename).toLowerCase();
+      let type = 'image';
+      if (['.mp4', '.webm', '.mov', '.ogg'].includes(ext)) type = 'video';
+      else if (ext === '.pdf') type = 'pdf';
+
+      state.stage.media[slot] = {
+        type,
+        format: ext.replace('.', ''),
+        name: req.body.filename,
+        url: `/uploads/${filename}`,
+        totalPages: type === 'pdf' ? (Number(req.body.totalPages) || 46) : 1
+      };
+      broadcast();
+      return res.json({ ok: true, slot, media: state.stage.media[slot] });
+    } catch (err) {
+      return res.status(500).json({ error: 'Lỗi lưu file: ' + err.message });
+    }
+  }
+
+  return res.status(400).json({ error: 'Không nhận được file hợp lệ' });
+});
+
+// 9.2 Gỡ bỏ media của một ô (quay về mặc định)
+app.post('/api/admin/media/remove', requireAdmin, (req, res) => {
+  const { slot } = req.body;
+  if (!slot) return res.status(400).json({ error: 'Thiếu slot' });
+  if (state.stage.media && state.stage.media[slot]) {
+    delete state.stage.media[slot];
+    broadcast();
+  }
+  res.json({ ok: true });
 });
 
 // 10. Khởi động lại toàn bộ buổi diễn (Reset)
